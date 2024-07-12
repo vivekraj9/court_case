@@ -6,7 +6,7 @@ const session = require('express-session');
 const passport = require('passport');
 const express = require('express');
 const app = express();
-
+//Hello vivek here
 //passport config
 require('./config/passport')(passport);
 
