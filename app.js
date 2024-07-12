@@ -7,9 +7,7 @@ const passport = require('passport');
 //Express
 const express = require('express');
 const app = express();
-//Hello vivek here
-//HII
-//passport config
+
 require('./config/passport')(passport);
 
 //db config
@@ -92,7 +90,7 @@ app.use('/client', require('./routes/client.js'));
 app.use('/lawyer', require('./routes/lawyer.js'));
 app.use('/chat', require('./routes/chat.js'));
 
-//HIIII
+
 const PORT = process.env.PORT || 5000;
 app.listen
     (
