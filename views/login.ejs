@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link type="text/css" rel="stylesheet" href="/css/login_style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            /* background-color: #f8f9fa; */
+            background: url('https://media.istockphoto.com/id/1330033671/photo/focus-on-hammer-group-of-files-on-judge-table-covered-with-dust-concept-of-pending-old-cases.webp?b=1&s=170667a&w=0&k=20&c=HIDYFEaSvUhU4ruW_S2Sqm0LD8Z5BBGxC4saPy7Ie_U=') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            text-align: center;
+            color: #343a40;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: auto;
+        }
+
+        p {
+            text-align: center;
+            font-weight: bold;
+        }
+
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        .pratik {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        label {
+            margin-top: 10px;
+            display: block;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .backbtn {
+            width: auto;
+            padding: 10px 18px;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .backbtn:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <h1><i class="fa fa-user-circle-o" style="font-size:36px"></i> Login</h1>
+    </center>
+
+    <%- include('./partials/messages.ejs') %>
+
+    <form action="/login" method="POST">
+        <!-- <center> -->
+            <div class="container">
+                <p><b>Please select one of the following choices:</b></p>
+                <input type="radio" name="personType" value="c" required> Client
+                <input type="radio" name="personType" value="l" required> Lawyer
+                <br><br><br>
+
+                <label for="email"><b>Email:</b></label>
+                <br>
+                <input class="pratik" type="email" placeholder="Enter Email" name="email" required>
+                <br>
+
+                <label for="password"><b>Password:</b></label>
+                <br>
+                <input class="pratik" type="password" placeholder="Enter Password" name="password" required>
+                <br>
+
+                <button type="submit">Login</button>
+            </div>
+        <!-- </center> -->
+    </form>
+
+    <form action="/" method="GET">
+        <div class="container" style="background-color:#f1f1f1">
+            <button type="submit" class="backbtn">Back</button>
+        </div>
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" href="/css/dashboard_style.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #343a40;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .container-fluid {
+            display: flex;
+            justify-content: space-between;
+            align-items: stretch;
+        }
+
+        #navigation {
+            max-width: 200px;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .navi ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .navi ul li {
+            margin-bottom: 10px;
+        }
+
+        .navi form button {
+            width: 100%;
+            cursor: pointer;
+            padding: 10px 16px;
+            background-color: #28a745;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .navi form button:hover {
+            background-color: #218838;
+        }
+
+        table {
+            display: none; /* Hide all tables by default */
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            border: 1px solid #dee2e6;
+            text-align: left;
+            padding: 12px;
+        }
+
+        th {
+            background-color: #007bff;
+            color: #ffffff;
+        }
+
+        caption {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #343a40;
+        }
+
+        button {
+            cursor: pointer;
+            padding: 10px 16px;
+            background-color: #28a745;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const activeCasesButton = document.getElementById("activeCasesButton");
+            const resolvedCasesButton = document.getElementById("resolvedCasesButton");
+            const activeCasesTable = document.getElementById("activeCasesTable");
+            const resolvedCasesTable = document.getElementById("resolvedCasesTable");
+
+            activeCasesTable.style.display = "none";
+            resolvedCasesTable.style.display = "none";
+
+            activeCasesButton.addEventListener("click", function () {
+                activeCasesTable.style.display = "table";
+                resolvedCasesTable.style.display = "none";
+            });
+
+            resolvedCasesButton.addEventListener("click", function () {
+                activeCasesTable.style.display = "none";
+                resolvedCasesTable.style.display = "table";
+            });
+        });
+    </script>
+</head>
+
+<body class="home">
+    <div class="container-fluid display-table">
+        <div class="row display-table-row">
+            <div class="col-md-2 col-sm-1 hidden-xs display-table-cell v-align box" id="navigation">
+                <div class="logo"></div>
+                <div class="navi">
+                    <ul>
+                        <li>
+                            <form action="/client/dashboard" method="GET">
+                                <button type="submit">
+                                    <i class="fa fa-home" aria-hidden="true"></i> Dashboard
+                                </button>
+                            </form>
+                        </li>
+                        <li>
+                            <form action="/client/add_case_pg1" method="GET">
+                                <button type="submit">
+                                    <i class="fa fa-plus" aria-hidden="true"></i> Add Case
+                                </button>
+                            </form>
+                        </li>
+                        
+                        <li>
+                            <form action="/logout" method="GET">
+                                <button type="submit">
+                                    <i class="fa fa-sign-out" aria-hidden="true"></i> Log Out
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-10 col-sm-11 display-table-cell v-align">
+                <h1><i class="fa fa-dashboard" style="font-size:48px;color:black"></i><b><%= f_name %>'s Dashboard</b></h1>
+
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <button id="activeCasesButton">Active Cases</button>
+                    <button id="resolvedCasesButton">Resolved Cases</button>
+                </div>
+
+                <table id="activeCasesTable" style="display: none;">
+                    <caption>Active Cases</caption>
+                    <tr>
+                        <th>Case Type</th>
+                        <th>Case Name</th>
+                        <th>Description</th>
+                        <th>Action</th>
+                        <th>Details</th>
+                    </tr>
+                    <tbody>
+                        <% cases.forEach
+                        (
+                            (case1) => 
+                            { 
+                                if(case1.isResolved === "N")
+                                { %>
+                                    <tr>
+                                        <td><%= case1.case_type %></td>
+                                        <td><%= case1.case_name %></td>
+                                        <td><%= case1.case_descp %></td>
+                                        <td>
+                                            <form action="/client/resolve_case/<%= case1._id %>" method="POST">
+                                                <button type="submit">Case is Resolved</button>
+                                            </form>
+                                        </td>
+                                        <td><form action="/client/display_case_details/<%= case1._id %>" method="GET"><button type="submit">Further Details</button></form></td>
+                                    </tr>
+                                <% }
+                            }
+                        ); %>
+                    </tbody>
+                </table>
+
+                <br>
+
+                <table id="resolvedCasesTable" style="display: none;">
+                    <caption>Resolved Cases</caption>
+                    <tr>
+                        <th>Case Type</th>
+                        <th>Case Name</th>
+                        <th>Description</th>
+                        <th>Details</th>
+                    </tr>
+                    <tbody>
+                        <% cases.forEach
+                        (
+                            (case1) => 
+                            { 
+                                if(case1.isResolved === "Y")
+                                { %>
+                                    <tr>
+                                        <td><%= case1.case_type %></td>
+                                        <td><%= case1.case_name %></td>
+                                        <td><%= case1.case_descp %></td>
+                                        <td><form action="/client/display_case_details/<%= case1._id %>" method="GET"><button type="submit">Further Details</button></form></td>
+                                    </tr>
+                                <% }
+                            }
+                        ); %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

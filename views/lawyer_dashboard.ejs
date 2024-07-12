@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= f_name %>'s Dashboard</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" href="/css/dashboard_style.css"> <!-- Add your custom styles here -->
+    <style>
+        /* Add any additional custom styles here */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('https://media.istockphoto.com/id/174197278/photo/gavel.webp?b=1&s=170667a&w=0&k=20&c=bwOZxFGTZWL_f_jo3f0ifE8Qhz3YQhRpntpkVvSt6qQ=');
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .dashboard-header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .dashboard-navigation {
+            background-color: #f8f8f8;
+            padding-top: 20px;
+            border-right: 1px solid #ddd;
+        }
+
+        .dashboard-navigation ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .dashboard-navigation li {
+            margin-bottom: 10px;
+        }
+
+        .dashboard-content {
+            padding: 20px;
+        }
+
+        .case-table th, .case-table td {
+            text-align: center;
+        }
+
+        .case-table th {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .case-table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .case-table tbody tr:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+
+<body class="home">
+    <div class="dashboard-header">
+        <h1><i class="fa fa-dashboard" style="font-size:48px;color:white;"></i>
+            <b><%= f_name %>'s Dashboard</b></h1>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Navigation Sidebar -->
+            <div class="col-md-2 col-sm-3 hidden-xs dashboard-navigation">
+                <div class="navi">
+                    <ul>
+                        <li><form action="/lawyer/dashboard" method="GET"><button type="submit"><i
+                                    class="fa fa-home" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Dashboard</span></button></form>
+                        </li>
+                        <li><form action="/lawyer/profile" method="GET"><button type="submit"><i
+                                    class="fa fa-user" aria-hidden="true"></i><span
+                                    class="hidden-xs hidden-sm">Edit Profile</span></button></form></li>
+                        <!-- <li><form action="" method="GET"><button type="submit"><i class="fa fa-plus"
+                                    aria-hidden="true"></i><span class="hidden-xs hidden-sm">Add Invoice</span></button></form></li> -->
+                        <!-- <li><form action="" method="GET"><button type="submit"><i class="fa fa-bell"
+                                    aria-hidden="true"></i><span class="hidden-xs hidden-sm">Notifications</span></button></form></li> -->
+                        <li><form action="/logout" method="GET"><button type="submit"><i class="fa fa-sign-out"
+                                    aria-hidden="true"></i><span class="hidden-xs hidden-sm">Log Out</span></button></form></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-10 col-sm-9 col-xs-12 dashboard-content">
+                <div class="messages-container">
+                    <%- include('./partials/messages.ejs') %>
+                </div>
+
+                <div class="active-cases">
+                    <h2>Active Cases</h2>
+                    <table class="table case-table">
+                        <thead>
+                            <tr>
+                                <th>Case Type</th>
+                                <th>Case Name</th>
+                                <th>Description</th>
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% cases.forEach((case1) => { if(case1.isResolved === 'N') { %>
+                                <tr>
+                                    <td><%= case1.case_type %></td>
+                                    <td><%= case1.case_name %></td>
+                                    <td><%= case1.case_descp %></td>
+                                    <td><form action="/client/display_case_details/<%= case1._id %>" method="GET"><button
+                                                type="submit" class="btn btn-info btn-sm">Details</button></form></td>
+                                </tr>
+                            <% } }); %>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="resolved-cases">
+                    <h2>Resolved Cases</h2>
+                    <table class="table case-table">
+                        <thead>
+                            <tr>
+                                <th>Case Type</th>
+                                <th>Case Name</th>
+                                <th>Description</th>
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% cases.forEach((case1) => { if(case1.isResolved === 'Y') { %>
+                                <tr>
+                                    <td><%= case1.case_type %></td>
+                                    <td><%= case1.case_name %></td>
+                                    <td><%= case1.case_descp %></td>
+                                    <td><form action="/client/display_case_details/<%= case1._id %>" method="GET"><button
+                                                type="submit" class="btn btn-info btn-sm">Details</button></form></td>
+                                </tr>
+                            <% } }); %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

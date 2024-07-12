@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/css/register_profile_style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            /* background-color: #f8f9fa; */
+            background: url('https://media.istockphoto.com/id/1346156607/photo/empty-american-style-courtroom-supreme-court-of-law-and-justice-trial-stand-courthouse-before.webp?b=1&s=170667a&w=0&k=20&c=ixLiZ8-eZ80AifvMC_WqRYO9_0Tzd_mWOUnMHXMbNEE=') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        h2 {
+            text-align: center;
+            color: #343a40;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: auto;
+        }
+
+        label {
+            margin-top: 10px;
+            display: block;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="date"],
+        textarea {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <h2><i class="fa fa-user-plus" style="font-size:32px"> <%= f_name %>'s Details</i></h2>
+    </center>
+
+    <%- include('./partials/messages.ejs') %>
+
+    <form action="/lawyer/profile" method="POST">
+        <div class="container">
+            <label for="bar_id">BAR Council ID <span style="color: red;">*</span></label>
+            <input type="text" placeholder="Enter your BAR Council ID" name="bar_id" required>
+
+            <label for="company_name">Company Name <span style="color: red;">*</span></label>
+            <input type="text" placeholder="Enter Company name ('self' if self-employed)" name="company_name" required>
+
+            <label for="pref_case_types">Preferred Case Types (Comma Separated) <span style="color: red;">*</span></label>
+            <input type="text" placeholder="Enter COMMA SEPARATED preferred case types" name="pref_case_types" required>
+
+            <label for="exp_yrs">No. of years of experience <span style="color: red;">*</span></label>
+            <input type="number" placeholder="Enter no. of years of experience as a lawyer" name="exp_yrs" required>
+            <br>
+
+            <label for="exp">Experience <span style="color: red;">*</span></label>
+            <br>
+            <textarea placeholder="Enter your experience as a lawyer" name="exp" required></textarea>
+            <br>
+
+            <label for="fees">Fees <span style="color: red;">*</span> Rs.</label>
+            <input type="number" placeholder="Enter your fees" name="fees" required>
+            <br>
+
+            <label for="fee_descp">Fee structure <span style="color: red;">*</span></label>
+            <input type="text" placeholder="Enter your fee structure" name="fee_descp" required>
+
+            <label for="dob">Date Of Birth</label>
+            <input type="date" placeholder="Enter your date of birth" name="dob">
+            <br>
+
+            <label for="age">Age (in Years)</label>
+            <input type="number" placeholder="Enter your age" name="age">
+            <br>
+
+            <label for="ph_no">Phone Number <span style="color: red;">*</span> (+91)(0)</label>
+            <input type="number" placeholder="Enter your 10-digit phone number" name="ph_no" required>
+
+            <button type="submit" class="button">Register Details</button>
+        </div>
+    </form>
+</body>
+
+</html>

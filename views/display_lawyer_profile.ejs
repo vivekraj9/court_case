@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/css/register_profile_style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: url('https://media.istockphoto.com/id/626367794/photo/wood-gavel.webp?b=1&s=170667a&w=0&k=20&c=2YyMREQxCK8oL7IJ86uhDFjS0WllztM-T4eaaX0_Pww=') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            color: #343a40;
+        }
+
+        h2 {
+            font-size: 24px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgba(85, 153, 56, 0.8);
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        form {
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        button {
+            cursor: pointer;
+            padding: 10px 16px;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <h2><i class="fa fa-user-plus" style="font-size:32px"> <%= fname %>'s Details</i></h2>
+    </center>
+
+    <form action="client/display_case_details" method="GET" class="container">
+        <label><b>Full Name: </b></label>
+        <br>
+        <label><%= fname %> <%= mname %> <%= lname %></label>
+        <br>
+
+        <label><b>Company Name: </b></label>
+        <br>
+        <label><%= company_name %></label>
+        <br>
+
+        <label><b>Preferred Case Type(s): </b></label>
+        <br>
+        <label><%= pref_case_types %></label>
+        <br>
+
+        <label><b>No. of years of experience: </b></label>
+        <br>
+        <label><%= exp_yrs %></label>
+        <br>
+
+        <label><b>Experience: </b></label>
+        <br>
+        <label><%= experience %></label>
+        <br>
+
+        <label><b>Fees: </b>Rs. <%= fees %></label>
+        <br>
+
+        <label><b>Fee structure: </b></label>
+        <br>
+        <label><%= fee_descp %></label>
+        <br>
+
+        <label><b>Date Of Birth: </b><%= dob %></label>
+        <br>
+
+        <label><b>Age: </b><%= age %> yrs</label>
+        <br>
+
+        <label><b>e-mail: </b></label>
+        <br>
+        <label><%= email %></label>
+        <br>
+
+        <label><b>Phone Number: </b>(+91)(0)<%= ph_no %></label>
+        <br>
+
+        <!-- <button type="submit">Continue</button> -->
+    </form>
+
+    <!-- <form action="/lawyer/dashboard<%=  %>" method="GET">
+        <button type="submit">Open Chat</button>
+    </form> -->
+</body>
+
+</html>

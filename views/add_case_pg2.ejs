@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/add_case_pg2_style.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+
+        #main {
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="/client/add_case_pg2" method="POST">
+        <section class="container">
+            <div id="main">
+                <h1><strong>Please Select a Lawyer</strong></h1>
+                <div class="tbl-header">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Select</th>
+                                <th>Lawyer's Name</th>
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="tbl-content">
+                    <table>
+                        <tbody>
+                            <% lawyers.forEach((lawyer) => { if(lawyer.is_profile_complete === "Y") { %>
+                                <tr>
+                                    <td>
+                                        <label><input required type="radio" name="lawyer_id" value="<%= lawyer._id %>"></label>
+                                    </td>
+                                    <td><%= lawyer.fname %></td>
+                                    <td><form action="/lawyer/display_lawyer_profile/<%= lawyer._id %>" method="GET"><button type="submit">More Details</button></form></td>
+                                </tr>
+                            <% } }); %>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="center">
+                    <button type="submit"><strong>Proceed</strong></button>
+                </div>
+            </div>
+        </section>
+    </form>
+</body>
+
+</html>
