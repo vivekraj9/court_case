@@ -14,7 +14,7 @@ require('./config/passport')(passport);
 //db config
 // const db = require('./config/keys').MongoURI; //for MongoDB Atlas
 //const db = 'mongodb://127.0.0.1:27017/court_case_management' //for local MongoDB
-
+//hello
 mongoose.connect('mongodb+srv://vivekraj:vivekraj@cluster0.jpx9lxm.mongodb.net/court_case', {
     useNewUrlParser: true,
     useCreateIndex: true,
